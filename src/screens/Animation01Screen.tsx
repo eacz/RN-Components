@@ -1,54 +1,11 @@
 import React from 'react'
-import { useRef } from 'react'
-import { Easing } from 'react-native'
 import { Animated, View, Button } from 'react-native'
+import useAnimation from '../hooks/useAnimation'
 import styles from '../themes/AppTheme'
 
 const Animation01Screen = () => {
-  const opacity = useRef(new Animated.Value(0)).current
-  const top = useRef(new Animated.Value(-100)).current
 
-  const fadeIn = (duration: number = 300) => {
-    Animated.timing(
-      opacity,
-      {
-        toValue: 1,
-        duration,
-        useNativeDriver: true
-      }
-    ).start()
-
-    Animated.timing(
-      top,
-      {
-        toValue: 0,
-        duration: duration+300,
-        useNativeDriver: true,
-        easing: Easing.bounce
-      }
-    ).start()
-  }
-
-  const fadeOut = (duration: number = 300) => {
-    Animated.timing(
-      opacity,
-      {
-        toValue: 0,
-        duration,
-        useNativeDriver: true
-      }
-    ).start()
-
-    Animated.timing(
-      top,
-      {
-        toValue: -100,
-        duration: duration+300,
-        useNativeDriver: true,
-      }
-    ).start()
-    
-  }
+  const {opacity, position, fadeIn, fadeOut, startMovingPosition} = useAnimation()
 
   return (
     <View style={styles.containerCenter}>
@@ -58,12 +15,12 @@ const Animation01Screen = () => {
           opacity,
           marginBottom: 20,
           transform: [{
-            translateY: top
+            translateY: position
           }]
         }} 
       />
-      <Button color="green" title="fadeIn" onPress={() => fadeIn()}/>
-      <Button color="red" title="fadeOut" onPress={() => fadeOut()}/>
+      <Button color="green" title="fadeIn" onPress={() => {fadeIn(); startMovingPosition(-100,0)}}/>
+      <Button color="red" title="fadeOut" onPress={() => {fadeOut(); startMovingPosition(0,-100)}}/>
     </View>
   )
 }
