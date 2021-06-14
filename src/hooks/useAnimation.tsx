@@ -1,6 +1,13 @@
 import { useRef } from "react"
 import { Animated, Easing } from "react-native"
 
+interface startMovingPositionProps {
+  initPosition?: number,
+  toPosition?: number,
+  duration?: number,
+  bounce?: boolean,
+}
+
 const useAnimation = () => {
   const opacity = useRef(new Animated.Value(0)).current
   const position = useRef(new Animated.Value(0)).current
@@ -28,7 +35,13 @@ const useAnimation = () => {
     ).start()
   }
 
-  const startMovingPosition = (initPosition : number = -100, toPosition: number = 0, duration: number = 300) => {
+  const startMovingPosition = ({
+    initPosition= -100, 
+    toPosition = 0, 
+    duration = 300, 
+    bounce = false
+  }:startMovingPositionProps) => {
+    
     position.setValue(initPosition);
     Animated.timing(
       position,
@@ -36,11 +49,10 @@ const useAnimation = () => {
         toValue: toPosition,
         duration,
         useNativeDriver: true,
-        //easing: Easing.bounce
+        easing: bounce ? Easing.bounce : undefined
       }
     ).start()
   }
-
 
   return {
     opacity,

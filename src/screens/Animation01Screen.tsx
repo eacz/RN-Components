@@ -19,8 +19,8 @@ const Animation01Screen = () => {
           }]
         }} 
       />
-      <Button color="green" title="fadeIn" onPress={() => {fadeIn(); startMovingPosition(-100,0)}}/>
-      <Button color="red" title="fadeOut" onPress={() => {fadeOut(); startMovingPosition(0,-100)}}/>
+      <Button color="green" title="fadeIn" onPress={() => {fadeIn(); startMovingPosition({initPosition: -100, toPosition: 0, bounce: true})}}/>
+      <Button color="red" title="fadeOut" onPress={() => {fadeOut(); startMovingPosition({initPosition: 0, toPosition: -100})}}/>
     </View>
   )
 }
