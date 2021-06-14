@@ -7,6 +7,16 @@ const styles = StyleSheet.create({
     },
     globalMargin:{
       marginHorizontal:20
+    },
+    purpleBox: {
+      backgroundColor: '#5856d6',
+      width: 150,
+      height: 150
+    },
+    containerCenter: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
     }
 });
 
