@@ -21,6 +21,11 @@ const menuItems : MenuItem[] = [
     icon: 'alert-circle-outline',
     component: 'AlertScreen'
   },
+  {
+    name: 'TextInput',
+    icon: 'text-outline',
+    component: 'TextInputScreen'
+  },
 ]
 
 export default menuItems
