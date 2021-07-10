@@ -41,7 +41,8 @@ const SectionListScreen = () => {
         renderSectionHeader={({section}) => (
           <View style={{backgroundColor: 'white'}}> 
                   <HeaderTitle title={section.casa} /> 
-              </View>)}
+          </View>
+        )}
         renderItem={({item}) => <Text>{item}</Text>}
         renderSectionFooter={({section}) => <HeaderTitle title={`Total Casa: ${section.data.length}`} /> }
         ListFooterComponent={() => <HeaderTitle title={`Total Casas: ${casas.length}`} />}
