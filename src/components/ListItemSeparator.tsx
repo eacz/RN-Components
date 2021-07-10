@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const FlatListItemSeparator = () => {
+const ListItemSeparator = () => {
   return (
     <View style={{
       borderBottomWidth: 1, 
@@ -12,4 +12,4 @@ const FlatListItemSeparator = () => {
   )
 }
 
-export default FlatListItemSeparator
+export default ListItemSeparator

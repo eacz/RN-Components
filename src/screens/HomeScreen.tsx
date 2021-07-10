@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, FlatList } from 'react-native'
 import HeaderTitle from '../components/HeaderTitle'
-import FlatListItemSeparator from '../components/FlatListItemSeparator'
 import FlatListMenuItem from '../components/FlatListMenuItem'
 import menuItems from '../data/menuItems'
 import styles from '../themes/AppTheme'
+import ListItemSeparator from '../components/ListItemSeparator'
 
 
 
@@ -19,7 +19,7 @@ const HomeScreen = () => {
         renderItem={({item}) =>  <FlatListMenuItem menuItem={item} />}
         keyExtractor={(item) => item.name}
         ListHeaderComponent={ () => <HeaderTitle title="Menu options" /> }
-        ItemSeparatorComponent={ FlatListItemSeparator }
+        ItemSeparatorComponent={ ListItemSeparator }
       />
     </View>
   )

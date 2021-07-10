@@ -18,7 +18,7 @@ const menuItems : MenuItem[] = [
   },
   {
     name: 'Alert',
-    icon: 'alert-circle-outline',
+    icon: 'alert-outline',
     component: 'AlertScreen'
   },
   {
@@ -28,8 +28,13 @@ const menuItems : MenuItem[] = [
   },
   {
     name: 'Pull to refresh',
-    icon: 'refresh-circle-outline',
+    icon: 'refresh-outline',
     component: 'PullToRefreshScreen'
+  },
+  {
+    name: 'Section List',
+    icon: 'list-outline',
+    component: 'SectionListScreen'
   },
 ]
 
