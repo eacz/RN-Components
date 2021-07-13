@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
-import { View, Text, Animated, ActivityIndicator } from 'react-native'
+import { View, Animated, ActivityIndicator, StyleProp, ImageStyle } from 'react-native'
 import useAnimation from '../hooks/useAnimation'
 
 interface Props {
-  uri: string
+  uri: string;
+  style?: StyleProp<ImageStyle>
 }
 
-const FadeInImage = ({uri}:Props) => {
+const FadeInImage = ({uri, style = {} }:Props) => {
   const {opacity, fadeIn} = useAnimation()
   const [isLoading, setIsLoading] = useState(true)
 
@@ -24,7 +25,7 @@ const FadeInImage = ({uri}:Props) => {
     <Animated.Image 
       onLoadEnd={finishLoading}
       source={{uri}}
-      style={{width: '100%', height:400, opacity}}
+      style={{...style as any, opacity}}
       />
     </View>
   )

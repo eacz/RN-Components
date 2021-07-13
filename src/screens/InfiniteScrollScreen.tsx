@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
-import { ActivityIndicator, Image } from 'react-native';
-import { FlatList, View, Text, StyleSheet } from 'react-native';
+import { ActivityIndicator,  } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import HeaderTitle from '../components/HeaderTitle';
 import FadeInImage from '../components/FadeInImage';
 
@@ -11,6 +11,7 @@ const InfiniteScrollScreen = () => {
   const renderItem = (item:number) => {
     return (
       <FadeInImage 
+        style={{width: '100%', height: 400}}
         uri={`https://picsum.photos/id/${item}/500/400`}
       />
     )
@@ -34,7 +35,11 @@ const InfiniteScrollScreen = () => {
         data={numbers}
         keyExtractor={(item) => item.toString() }
         renderItem={({item}) => renderItem(item)}
-        ListHeaderComponent={() => <HeaderTitle title="InfiniteScroll" /> }
+        ListHeaderComponent={() => (
+          <View style={{marginHorizontal: 20}}> 
+            <HeaderTitle title="InfiniteScroll" />
+          </View>
+        )}
         onEndReached={loadMore}
         onEndReachedThreshold={0.5}
         ListFooterComponent={() => (
