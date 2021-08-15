@@ -1,14 +1,16 @@
 import React from 'react'
+import { useState } from 'react';
 import { Dimensions, Text, View, Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
-import Carousel from 'react-native-snap-carousel'
+import Carousel, { Pagination } from 'react-native-snap-carousel'
 import HeaderTitle from '../components/HeaderTitle';
 import slides, { Slide } from '../data/slides';
 
 const {height: heightScreen, width: widthScreen} = Dimensions.get('window')
 
 const SlidesScreen = () => {
+  const [activeSlide, setActiveSlide] = useState(0)
 
   const renderItem = (item : Slide) => {
     return (
@@ -30,6 +32,12 @@ const SlidesScreen = () => {
         sliderWidth={widthScreen}
         itemWidth={widthScreen}
         layout="default"
+        onSnapToItem={(index) => setActiveSlide(index)}
+      />
+      <Pagination  
+        dotsLength={slides.length}
+        activeDotIndex={activeSlide}
+        dotStyle={styles.dotStyle}
       />
     </SafeAreaView>
   )
@@ -62,6 +70,12 @@ const styles = StyleSheet.create({
     },
     renderItemSubtitle: {
       fontSize: 16
+    },
+    dotStyle: {
+      width: 10, 
+      height: 10, 
+      borderRadius: 10, 
+      backgroundColor: '#5856D6'
     }
 
 });
