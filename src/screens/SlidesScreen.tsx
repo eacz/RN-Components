@@ -1,44 +1,54 @@
-import React from 'react'
-import { useState } from 'react';
-import { Dimensions, Text, View, Image } from 'react-native';
+import React, { useState, useRef } from 'react'
+import { Dimensions, Text, View, TouchableOpacity, Animated } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import HeaderTitle from '../components/HeaderTitle';
-import slides, { Slide } from '../data/slides';
+import slides from '../data/slides';
+import Icon from 'react-native-vector-icons/Ionicons';
+import useAnimation from '../hooks/useAnimation';
+import renderSlideItem from '../components/renderSlideItem';
+import { StackScreenProps } from '@react-navigation/stack';
 
 const {height: heightScreen, width: widthScreen} = Dimensions.get('window')
 
-const SlidesScreen = () => {
-  const [activeSlide, setActiveSlide] = useState(0)
+interface Props extends StackScreenProps <any,any> {};
 
-  const renderItem = (item : Slide) => {
-    return (
-      <View style={styles.renderItemContainer} >
-        <Image source={item.img} style={styles.renderItemImage} />
-        <Text style={styles.renderItemTitle}>{item.title}</Text>
-        <Text style={styles.renderItemSubtitle}>{item.desc}</Text>
-      </View>
-    )
+const SlidesScreen = ({navigation} : Props) => {
+  const {fadeIn, opacity} = useAnimation()
+  const buttonVisible = useRef(false)
+  const [activeSlide, setActiveSlide] = useState(0)
+  
+  const handleNavigation = () => {
+    if(buttonVisible.current){
+      navigation.navigate('HomeScreen')
+    }
   }
 
   return (
     <SafeAreaView style={styles.container} >
-      {/*<HeaderTitle title="SlideScreen" />*/}
       <Carousel
-        //ref={(c) => { this._carousel = c; }}
-        data={slides}
-        renderItem={({item}) => renderItem(item)}
-        sliderWidth={widthScreen}
-        itemWidth={widthScreen}
-        layout="default"
-        onSnapToItem={(index) => setActiveSlide(index)}
+        data={slides} layout="default"
+        renderItem={({item}) => renderSlideItem({item})}
+        sliderWidth={widthScreen} itemWidth={widthScreen}
+        onSnapToItem={(index) => {
+          setActiveSlide(index)
+          if(index === 2) {
+            buttonVisible.current = true;
+            fadeIn()
+          }
+        }}
       />
-      <Pagination  
-        dotsLength={slides.length}
-        activeDotIndex={activeSlide}
-        dotStyle={styles.dotStyle}
-      />
+      <View style={styles.paginationContainer} >
+        <Pagination  
+          dotsLength={slides.length} activeDotIndex={activeSlide} dotStyle={styles.dotStyle}
+        />
+         <Animated.View style={{opacity}} >
+            <TouchableOpacity style={styles.nextButton} activeOpacity={0.9} onPress={handleNavigation} >
+              <Text style={styles.nextButtonText}>Next</Text>
+              <Icon name="chevron-forward-outline" color="white" size={30} />
+            </TouchableOpacity>
+         </Animated.View>
+      </View>
     </SafeAreaView>
   )
 }
@@ -51,31 +61,29 @@ const styles = StyleSheet.create({
       paddingTop: 50,
       marginRight: 40
     },
-    renderItemContainer: {
-      flex: 1,
-      backgroundColor: 'white',
-      borderRadius: 5,
-      padding: 40,
-      justifyContent: 'center'
-    },
-    renderItemImage: {
-      width: 300,
-      height: 400,
-      resizeMode: 'center'
-    },
-    renderItemTitle: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      color: '#5856d6'
-    },
-    renderItemSubtitle: {
-      fontSize: 16
-    },
     dotStyle: {
       width: 10, 
       height: 10, 
       borderRadius: 10, 
       backgroundColor: '#5856D6'
+    },
+    paginationContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginHorizontal: 10
+    },
+    nextButton: {
+      flexDirection: 'row',
+      backgroundColor: '#5856d6',
+      height: 40,
+      width: 120,
+      borderRadius: 10,
+      justifyContent: 'space-evenly',
+      alignItems: 'center'
+    },
+    nextButtonText: {
+      color: 'white',
+      fontSize: 20
     }
-
 });
