@@ -37,7 +37,7 @@ const AlertScreen = () => {
           cancelable: false,
           defaultValue: 'test',
           placeholder: 'placeholder'
-      }
+      },
   );
   }
 

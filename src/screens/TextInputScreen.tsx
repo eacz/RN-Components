@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import { View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
 import CustomSwitch from '../components/CustomSwitch';
 import HeaderTitle from '../components/HeaderTitle';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 import useForm from '../hooks/useForm';
 import stylesTheme from '../themes/AppTheme';
 
@@ -14,6 +15,8 @@ const TextInputScreen = () => {
     isSubscribed: false
   }
   const {form, onChange} = useForm(formInitState);
+  const {theme: { colors: { text, border } }} = useContext(ThemeContext)
+  
 
   return (
     <KeyboardAvoidingView
@@ -23,15 +26,15 @@ const TextInputScreen = () => {
         <View style={styles.globalMargin}>
           <HeaderTitle title="Text Inputs" />
           <TextInput 
-            style={styles.textInput}
+            style={{...styles.textInput, borderColor: border}}
             placeholder="Write your name"
             placeholderTextColor="gray"
             autoCorrect={false}
             autoCapitalize='words'
             onChangeText={(text) => onChange(text, 'name')}
             />
-          <TextInput 
-            style={styles.textInput}
+          <TextInput             
+            style={{...styles.textInput, borderColor: border}}
             placeholder="Write your email"
             placeholderTextColor="gray"
             autoCorrect={false}
@@ -41,7 +44,7 @@ const TextInputScreen = () => {
             />
 
           <TextInput 
-            style={styles.textInput}
+            style={{...styles.textInput, borderColor: border}}
             placeholder="Write your phone"
             placeholderTextColor="gray"
             autoCorrect={false}
@@ -50,7 +53,7 @@ const TextInputScreen = () => {
             />
 
             <View style={styles.switchRow}>
-              <Text style={styles.switchText}>Subscribe: </Text>
+              <Text style={{...styles.switchText, color: text}}>Subscribe: </Text>
               <CustomSwitch onChange={(value) => onChange(value, 'isSubscribed')} isOn={form.isSubscribed}  />
             </View>
             <HeaderTitle title={JSON.stringify(form, null, 2)} />

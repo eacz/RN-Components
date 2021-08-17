@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Text } from 'react-native';
 import { View, Button, Modal, StyleSheet } from 'react-native'
 import HeaderTitle from '../components/HeaderTitle';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 import globalStyles from '../themes/AppTheme';
 
 const ModalScreen = () => {
   const [visibility, setVisibility] = useState(false)
+  const {theme: {colors: { card, text }}} = useContext(ThemeContext)
   return (
     <View style={styles.globalMargin}>
       <HeaderTitle title="Modal" />
@@ -17,9 +19,9 @@ const ModalScreen = () => {
         visible={visibility}
       >
         <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
+          <View style={{...styles.modalContent, backgroundColor: card}}>
             <HeaderTitle title="Modal" />
-            <Text>Modal Body</Text>
+            <Text style={{color: text}} >Modal Body</Text>
             <Button title="Close" onPress={() => setVisibility(false)} />
 
           </View>
@@ -39,7 +41,6 @@ const styles = StyleSheet.create({
     },
     modalContent: {
       width: '90%',
-      backgroundColor: '#ffffff',
       borderRadius: 5,
       padding: 10,
       shadowOffset: {
