@@ -6,21 +6,28 @@ import { useContext } from 'react';
 import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 const ChangeThemeScreen = () => {
-  const { setDarkTheme, setLightTheme } = useContext(ThemeContext)
-  const handleChangeTheme = () => {
-    setDarkTheme( )
-  }
+  const { setDarkTheme, setLightTheme, theme: {colors: { primary }} } = useContext(ThemeContext)
+  
   return (
     <View style={appTheme.globalMargin} >
       <HeaderTitle title="Themes" />
-      <TouchableOpacity onPress={handleChangeTheme} style={styles.button} activeOpacity={0.8} >
-        <Text style={styles.buttonText} > Light/Dark </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity onPress={setLightTheme} style={{...styles.button, backgroundColor: primary}} activeOpacity={0.8} >
+          <Text style={styles.buttonText} > Light </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={setDarkTheme} style={{...styles.button, backgroundColor: primary}} activeOpacity={0.8} >
+          <Text style={styles.buttonText} > Dark </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   button: {
     backgroundColor: '#5856d6',
     width: 150,
@@ -31,7 +38,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#ffffff',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 22
   }
 });
 

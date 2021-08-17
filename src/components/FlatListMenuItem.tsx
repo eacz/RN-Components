@@ -11,7 +11,7 @@ interface Props {
 
 const FlatListMenuItem = ({menuItem} : Props) => {
   const navigation = useNavigation()
-  const {theme: {colors: { primary }}} = useContext(ThemeContext)
+  const {theme: {colors: { primary, text }}} = useContext(ThemeContext)
 
 
   return (
@@ -19,7 +19,7 @@ const FlatListMenuItem = ({menuItem} : Props) => {
       <View style={styles.container}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon name={menuItem.icon} color={primary} size={23} />
-          <Text style={styles.itemText}>{menuItem.name}</Text>
+          <Text style={{...styles.itemText, color: text}}>{menuItem.name}</Text>
         </View>
         <Icon name="chevron-forward-outline" color={primary} size={23} />
       </View>
