@@ -20,7 +20,7 @@ const StackNavigator = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: '#ffffff'
+          //backgroundColor: '#ffffff'
         }
       }}
     >
