@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
-import { Theme } from '@react-navigation/native';
+import React, { createContext, useReducer } from "react";
+import themeReducer, { ThemeState } from './ThemeReducer';
+import { lightTheme } from './ThemeReducer';
 
 interface ThemeContextProps {
-  theme: any,
+  theme: ThemeState,
   setDarkTheme: () => void,
   setLightTheme: () => void,
 }
@@ -11,10 +12,17 @@ interface ThemeContextProps {
 export const ThemeContext = createContext({} as ThemeContextProps);
 
 export const ThemeProvider = ({children} :any) => {
-  const theme = {}
-  const setDarkTheme = () => { console.log('setDarkTheme');
-   }
-  const setLightTheme = () => {console.log('setDarkTheme')}
+  
+  const [theme, dispatch] = useReducer(themeReducer, lightTheme)
+  
+  const setDarkTheme = () => { 
+    console.log('setDarkTheme');
+    dispatch({type: 'set_light_theme'})
+  }
+  const setLightTheme = () => {
+    console.log('setDarkTheme')
+    dispatch({type: 'set_light_theme'})
+  }
   return (
     <ThemeContext.Provider
       value={{
