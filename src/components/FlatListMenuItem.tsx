@@ -9,7 +9,6 @@ interface Props {
 }
 
 const FlatListMenuItem = ({menuItem} : Props) => {
-  const { colors } = useTheme()
   const navigation = useNavigation()
 
 
@@ -18,7 +17,7 @@ const FlatListMenuItem = ({menuItem} : Props) => {
       <View style={styles.container}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon name={menuItem.icon} color="#5856d6" size={23} />
-          <Text style={{...styles.itemText, color: colors.text}}>{menuItem.name}</Text>
+          <Text style={styles.itemText}>{menuItem.name}</Text>
         </View>
         <Icon name="chevron-forward-outline" color="#5856d6" size={23} />
       </View>

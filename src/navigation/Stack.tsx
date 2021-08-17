@@ -11,19 +11,22 @@ import SectionListScreen from '../screens/SectionListScreen';
 import ModalScreen from '../screens/ModalScreen';
 import InfiniteScrollScreen from '../screens/InfiniteScrollScreen';
 import SlidesScreen from '../screens/SlidesScreen';
+import ChangeThemeScreen from '../screens/ChangeThemeScreen';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator()
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        cardStyle: {
-          //backgroundColor: '#ffffff'
-        }
-      }}
-    >
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          cardStyle: {
+            //backgroundColor: '#ffffff'
+          }
+        }}
+        >
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Animation01Screen" component={Animation01Screen} />
       <Stack.Screen name="Animation02Screen" component={Animation02Screen} />
@@ -35,7 +38,9 @@ const StackNavigator = () => {
       <Stack.Screen name="ModalScreen" component={ModalScreen} />
       <Stack.Screen name="InfiniteScrollScreen" component={InfiniteScrollScreen} />
       <Stack.Screen name="SlidesScreen" component={SlidesScreen} />
+      <Stack.Screen name="ChangeThemeScreen" component={ChangeThemeScreen} />
     </Stack.Navigator>
+      </NavigationContainer>
   )
 }
 
