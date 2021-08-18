@@ -1,27 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Image, StyleSheet, Text, View } from "react-native"
 import { Slide } from "../data/slides"
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 interface Props {
   item: Slide
 }
 
-const renderSlideItem = ({item} : Props) => {
+const RenderSlideItem = ({item} : Props) => {
+  const {theme: {colors: { primary, text, background }}} = useContext(ThemeContext)
   return (
-    <View style={styles.container} >
+    <View style={{...styles.container, backgroundColor: background}} >
       <Image source={item.img} style={styles.image} />
-      <Text style={styles.title}>{item.title}</Text>
-      <Text style={styles.subtitle}>{item.desc}</Text>
+      <Text style={{...styles.title, color: primary}}>{item.title}</Text>
+      <Text style={{...styles.subtitle, color: text}}>{item.desc}</Text>
     </View>
   )
 }
 
-export default renderSlideItem
+export default RenderSlideItem
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     borderRadius: 5,
     padding: 40,
     justifyContent: 'center'
@@ -34,7 +35,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#5856d6'
   },
   subtitle: {
     fontSize: 16

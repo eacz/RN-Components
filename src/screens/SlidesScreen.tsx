@@ -6,9 +6,9 @@ import Carousel, { Pagination } from 'react-native-snap-carousel'
 import slides from '../data/slides';
 import Icon from 'react-native-vector-icons/Ionicons';
 import useAnimation from '../hooks/useAnimation';
-import renderSlideItem from '../components/renderSlideItem';
 import { StackScreenProps } from '@react-navigation/stack';
 import { ThemeContext } from '../context/themeContext/ThemeContext';
+import RenderSlideItem from '../components/RenderSlideItem';
 
 const {height: heightScreen, width: widthScreen} = Dimensions.get('window')
 
@@ -30,7 +30,7 @@ const SlidesScreen = ({navigation} : Props) => {
     <SafeAreaView style={styles.container} >
       <Carousel
         data={slides} layout="default"
-        renderItem={({item}) => renderSlideItem({item})}
+        renderItem={({item}) => <RenderSlideItem item={item} />}
         sliderWidth={widthScreen} itemWidth={widthScreen}
         onSnapToItem={(index) => {
           setActiveSlide(index)

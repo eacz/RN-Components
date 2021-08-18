@@ -26,7 +26,7 @@ const TextInputScreen = () => {
         <View style={styles.globalMargin}>
           <HeaderTitle title="Text Inputs" />
           <TextInput 
-            style={{...styles.textInput, borderColor: border}}
+            style={{...styles.textInput, borderColor: border, color: text}}
             placeholder="Write your name"
             placeholderTextColor="gray"
             autoCorrect={false}
@@ -34,7 +34,7 @@ const TextInputScreen = () => {
             onChangeText={(text) => onChange(text, 'name')}
             />
           <TextInput             
-            style={{...styles.textInput, borderColor: border}}
+            style={{...styles.textInput, borderColor: border, color: text}}
             placeholder="Write your email"
             placeholderTextColor="gray"
             autoCorrect={false}
@@ -44,7 +44,7 @@ const TextInputScreen = () => {
             />
 
           <TextInput 
-            style={{...styles.textInput, borderColor: border}}
+            style={{...styles.textInput, borderColor: border, color: text}}
             placeholder="Write your phone"
             placeholderTextColor="gray"
             autoCorrect={false}

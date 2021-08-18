@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 const PullToRefreshScreen= () => {
-  const {theme: { colors: { text, border, background, primary } }} = useContext(ThemeContext)
+  const {theme: { colors: { text, background, primary } }} = useContext(ThemeContext)
   const {top} = useSafeAreaInsets()
   const [refreshing, setRefreshing] = useState(false)
   const [data, setData] = useState<string>()
